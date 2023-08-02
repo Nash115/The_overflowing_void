@@ -1,14 +1,26 @@
+import json
+
+with open("settings.json","r") as f:
+    settings = json.load(f)
+
 class Player:
     def __init__(self):
         self.x = 0
         self.y = 0
-        self.size = 8 # The "hitbox" of the player is a square
+        self.size = 16 # Assume that the player is a square
         self.speed = 1
-        self.hitbox = []
     def move(self, xDirection, yDirection):
+        if self.x + xDirection < 0:
+            return False
+        if self.x + xDirection > settings["size"][0]-1:
+            return False
+        if self.y + yDirection < 0:
+            return False
+        if self.y + yDirection > settings["size"][1]-1:
+            return False
         self.x += xDirection*self.speed
         self.y += yDirection*self.speed
-    def adaptHitbox(self):
-        self.hitbox = []
-        self.hitbox.append((self.x,self.y),(self.x+self.size,self.y+self.size))
+        return True
+    def draw(self,pxl):
+        pxl.rect(player.x*16,player.y*16,16,16,3)
 player = Player()

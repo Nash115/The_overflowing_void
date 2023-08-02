@@ -1,37 +1,45 @@
-import pyxel
+import pyxel,json
 from classes import event, player, menu
 
 event.setPyxel(pyxel)
 
+with open("settings.json","r") as f:
+    settings = json.load(f)
+
 class App:
     def __init__(self):
-        pyxel.init(160, 120, title="The overflowing void")
+        pyxel.init(settings["size"][0]*16, settings["size"][1]*16, title="The overflowing void")
+        pyxel.load("my_resource.pyxres")
+        pyxel.playm(0, loop=True)
         pyxel.run(self.update, self.draw)
     def update(self):
         if menu.status == False:
-            if event.left():
+            if event.simple_left():
                 player.move(-1,0)
-            if event.right():
+            if event.simple_right():
                 player.move(1,0)
-            if event.down():
+            if event.simple_down():
                 player.move(0,1)
-            if event.up():
+            if event.simple_up():
                 player.move(0,-1)
         else:
-            if event.simple_left():
-                print("Déplacement simple")
-            if event.simple_right():
-                print("Déplacement simple")
             if event.simple_down():
-                print("Déplacement simple")
+                menu.selected = "Quit"
             if event.simple_up():
-                print("Déplacement simple")
+                menu.selected = "Play"
 
         if event.confirm():
-            print("Confirmation")
-
+            if menu.status == False:
+                pass
+            else:
+                menu.confirmed(pyxel)
+                
     def draw(self):
         pyxel.cls(0)
-        pyxel.rect(player.x,player.y,8,8,3)
+
+        if menu.status == False:
+            player.draw(pyxel)
+        else:
+            menu.draw(pyxel)
 
 App()
