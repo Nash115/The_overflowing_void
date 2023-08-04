@@ -7,6 +7,7 @@ with open("settings.json","r") as f:
     settings = json.load(f)
 
 room = None
+actualRoom = False
 
 class App:
     def __init__(self):
@@ -15,7 +16,7 @@ class App:
         pyxel.playm(0, loop=True)
         pyxel.run(self.update, self.draw)
     def update(self):
-        global room
+        global room, actualRoom
 
         if menu.status == False:
             if event.simple_left():
@@ -26,7 +27,7 @@ class App:
                 player.move(0,1)
             if event.simple_up():
                 player.move(0,-1)
-        else:
+        elif menu.win == False:
             if event.simple_down():
                 menu.selected = "Quit"
             if event.simple_up():
@@ -38,9 +39,15 @@ class App:
             else:
                 menu.confirmed(pyxel)
 
-        room = rooms[0]
+        if actualRoom and rooms != []:
+            rooms.pop(0)
 
-        room.update()
+        if rooms == []:
+            menu.win = True
+            menu.status = True
+        else:
+            room = rooms[0]
+            actualRoom = room.update(player.x,player.y)
                 
     def draw(self):
         global room
@@ -53,5 +60,7 @@ class App:
         else:
             menu.draw(pyxel)
 
+        pyxel.text(0,0,f"({player.x},{player.y})",3)
 
-App()
+if __name__ == "__main__":
+    App()
