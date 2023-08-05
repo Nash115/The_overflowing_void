@@ -20,13 +20,17 @@ class App:
 
         if menu.status == False:
             if event.simple_left():
-                player.move(-1,0)
+                if room.checkMove(player.x,player.y,-1,0):
+                    player.move(-1,0)
             if event.simple_right():
-                player.move(1,0)
+                if room.checkMove(player.x,player.y,1,0):
+                    player.move(1,0)
             if event.simple_down():
-                player.move(0,1)
+                if room.checkMove(player.x,player.y,0,1):
+                    player.move(0,1)
             if event.simple_up():
-                player.move(0,-1)
+                if room.checkMove(player.x,player.y,0,-1):
+                    player.move(0,-1)
         elif menu.win == False:
             if event.simple_down():
                 menu.selected = "Quit"
@@ -39,8 +43,10 @@ class App:
             else:
                 menu.confirmed(pyxel)
 
-        if actualRoom and rooms != []:
+        if (actualRoom != False) and rooms != []:
             rooms.pop(0)
+            player.x = actualRoom[0]
+            player.y = actualRoom[1]
 
         if rooms == []:
             menu.win = True
@@ -60,7 +66,10 @@ class App:
         else:
             menu.draw(pyxel)
 
-        pyxel.text(0,0,f"({player.x},{player.y})",3)
+        if menu.status == False:
+            pyxel.text(0,0,f"> Room_{room.number}",3)
+
+        pyxel.text(0,6,f"({player.x},{player.y})",3)
 
 if __name__ == "__main__":
     App()

@@ -5,8 +5,8 @@ with open("settings.json","r") as f:
 
 class Player:
     def __init__(self):
-        self.x = 0
-        self.y = 0
+        self.x = 1
+        self.y = 1
         self.size = 16 # Assume that the player is a square
         self.speed = 1
     def move(self, xDirection, yDirection):
