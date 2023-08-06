@@ -45,16 +45,17 @@ class App:
 
         if (actualRoom != False) and rooms != []:
             rooms.pop(0)
-            player.x = actualRoom[0]
-            player.y = actualRoom[1]
 
         if rooms == []:
             menu.win = True
             menu.status = True
         else:
+            if room != rooms[0] and room != None:
+                player.x = room.spawn[0]
+                player.y = room.spawn[1]
             room = rooms[0]
             actualRoom = room.update(player.x,player.y)
-                
+
     def draw(self):
         global room
 

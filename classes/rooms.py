@@ -1,26 +1,29 @@
-import json
+import json, os
 
 with open("textures/textures_data.json","r") as f:
     data = json.load(f)
 
 class Room:
+    """
+    Evry rooms have 2 plates : one for the background and one for the collisions
+    (because some levels need a background and a collision plate different)
+    """
     def __init__(self):
-        self.plate = [
-            ["NW","N","N","N","N","N","N","N","N","N","N","N","N","N","N","NE"],
-            ["W","g","g","g","g","g","g","g","g","g","g","g","g","g","g","E"],
-            ["W","g","g","g","g","g","g","g","g","g","g","g","g","g","g","E"],
-            ["W","g","g","g","g","g","g","g","g","g","g","g","g","g","g","E"],
-            ["W","g","g","g","g","g","g","g","g","g","g","g","g","g","end","E"],
-            ["W","g","g","g","g","g","g","g","g","g","g","g","g","g","g","E"],
-            ["W","g","g","g","g","g","g","g","g","g","g","g","g","g","g","E"],
-            ["W","g","g","g","g","g","g","g","g","g","g","g","g","g","g","E"],
-            ["SW","S","S","S","S","S","S","S","S","S","S","S","S","S","S","SE"]
-        ]
-        self.finished = False
         self.number = 0
+        self.finished = False
+        self.spawn = [1,1]
+        self.winPos = [15,4]
+    def load(self) -> None:
+        with open(f"levels/lv{self.number}.json","r") as f:
+            file = json.load(f)
+            self.plate = file["plate"]
+            if file["collision"] != None:
+                self.collision_plate = file["collision"]
+            else:
+                self.collision_plate = self.plate
     def checkMove(self, xPlayer, yPlayer, xDirection, yDirection) -> bool:
         collisions = ["W","E","N","S","NW","NE","SW","SE","wall"]
-        if self.plate[yPlayer+yDirection][xPlayer+xDirection] in collisions:
+        if self.collision_plate[yPlayer+yDirection][xPlayer+xDirection] in collisions:
             return False
         else:
             return True
@@ -29,32 +32,23 @@ class Room:
             for column in range(len(self.plate[line])):
                 if self.plate[line][column] != 0:
                     pxl.blt(column*16,line*16, 0, data[self.plate[line][column]][0], data[self.plate[line][column]][1], data[self.plate[line][column]][2], data[self.plate[line][column]][3], data[self.plate[line][column]][4])
+    def update(self,xPlayer,yPlayer) -> None:
+        if xPlayer == self.winPos[0] and yPlayer == self.winPos[1]:
+            return True
+        else:
+            return False
 
 # The update method of puzzles classes return False while the level is not finished
 rooms = []
 
-class Puzzle1(Room):
-    def __init__(self):
-        super().__init__()
-        with open("levels/lv1.json","r") as f:
-            self.plate = json.load(f)
-        self.number = 1
-    def update(self,xPlayer,yPlayer) -> None:
-        if xPlayer == 15 and yPlayer == 4:
-            return [1,1]
-        else:
-            return False
-rooms.append(Puzzle1())
+# Read all ".json" files in the folder "levels"
+for i in range(1, len([i for i in os.listdir("levels") if i.endswith(".json")])+1):
+    rooms.append(Room())
+    rooms[i-1].number = i
 
-class Puzzle2(Room):
-    def __init__(self):
-        super().__init__()
-        with open("levels/lv2.json","r") as f:
-            self.plate = json.load(f)
-        self.number = 2
-    def update(self,xPlayer,yPlayer) -> None:
-        if xPlayer == 15 and yPlayer == 5:
-            return [1,1]
-        else:
-            return False
-rooms.append(Puzzle2())
+for i in rooms:
+    with open(f"levels/lv{i.number}.json","r") as f:
+        actualJson = json.load(f)
+    i.spawn = actualJson["spawn"]
+    i.winPos = actualJson["win"]
+    i.load()
