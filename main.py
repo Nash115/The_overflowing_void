@@ -20,17 +20,21 @@ class App:
 
         if menu.status == False:
             if event.simple_left():
-                if room.checkMove(player.x,player.y,-1,0):
-                    player.move(-1,0)
+                if player.x != 0:
+                    if room.checkMove(player.x,player.y,-1,0):
+                        player.move(-1,0)
             if event.simple_right():
-                if room.checkMove(player.x,player.y,1,0):
-                    player.move(1,0)
+                if player.x != 15:
+                    if room.checkMove(player.x,player.y,1,0):
+                        player.move(1,0)
             if event.simple_down():
-                if room.checkMove(player.x,player.y,0,1):
-                    player.move(0,1)
+                if player.y != 8:
+                    if room.checkMove(player.x,player.y,0,1):
+                        player.move(0,1)
             if event.simple_up():
-                if room.checkMove(player.x,player.y,0,-1):
-                    player.move(0,-1)
+                if player.y != 0:
+                    if room.checkMove(player.x,player.y,0,-1):
+                        player.move(0,-1)
         elif menu.win == False:
             if event.simple_down():
                 menu.selected = "Quit"

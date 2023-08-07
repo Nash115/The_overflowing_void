@@ -7,6 +7,7 @@ class Room:
     """
     Evry rooms have 2 plates : one for the background and one for the collisions
     (because some levels need a background and a collision plate different)
+    The value of "collision" in the ".json" is null if the collision plate is the same as the background plate
     """
     def __init__(self):
         self.number = 0
@@ -42,7 +43,7 @@ class Room:
 rooms = []
 
 # Read all ".json" files in the folder "levels"
-for i in range(1, len([i for i in os.listdir("levels") if i.endswith(".json")])+1):
+for i in range(1, len([i for i in os.listdir("levels") if i.endswith(".json") if i.startswith("lv")])+1):
     rooms.append(Room())
     rooms[i-1].number = i
 
