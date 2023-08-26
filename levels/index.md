@@ -18,3 +18,7 @@ Wait... Are the walls real?
     - "win" : Win position
     - "plate" : Level's plate
     - "collisions" : Level's collisions (null if collisions are sames as plate)
+
+# TODO :
+- Add the "tunnel"
+- Add the "teleporter"
