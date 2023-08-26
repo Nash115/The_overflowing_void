@@ -23,7 +23,7 @@ class Room:
             else:
                 self.collision_plate = self.plate
     def checkMove(self, xPlayer, yPlayer, xDirection, yDirection) -> bool:
-        collisions = ["W","E","N","S","NW","NE","SW","SE","wall"]
+        collisions = ["W","E","N","S","NW","NE","SW","SE","wall","w"]
         if self.collision_plate[yPlayer+yDirection][xPlayer+xDirection] in collisions:
             return False
         else:

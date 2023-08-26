@@ -3,24 +3,24 @@
     "win":[15,4],
     "plate":[
         ["NW","N","N","N","N","N","N","N","N","N","N","N","N","N","N","NE"],
-        ["W","g","g","g","wall","g","wall","wall","g","g","wall","g","g","g","g","E"],
-        ["W","g","wall","g","wall","g","wall","g","g","wall","wall","wall","wall","wall","g","E"],
-        ["W","g","wall","g","wall","g","wall","g","g","g","g","g","g","wall","g","E"],
-        ["W","g","wall","g","g","g","wall","wall","g","wall","wall","g","g","wall","g","end"],
-        ["W","g","wall","wall","wall","wall","g","g","g","g","g","g","wall","wall","g","E"],
-        ["W","g","wall","g","g","g","g","wall","wall","g","wall","wall","wall","g","g","E"],
-        ["W","g","g","g","wall","wall","wall","g","g","g","g","g","g","g","wall","E"],
+        ["W","g","g","g","w","g","w","w","g","g","w","g","g","g","g","E"],
+        ["W","g","w","g","w","g","w","g","g","w","w","w","w","w","g","E"],
+        ["W","g","w","g","w","g","w","g","g","g","g","g","g","w","g","E"],
+        ["W","g","w","g","g","g","w","w","g","w","w","g","g","w","g","end"],
+        ["W","g","w","w","w","w","g","g","g","g","g","g","w","w","g","E"],
+        ["W","g","w","g","g","g","g","w","w","g","w","w","w","g","g","E"],
+        ["W","g","g","g","w","w","w","g","g","g","g","g","g","g","w","E"],
         ["SW","S","S","S","S","S","S","S","S","S","S","S","S","S","S","SE"]
     ],
     "collision":[
         ["NE", "N", "N", "N", "N", "N", "N", "N", "N", "N", "N", "N", "N", "N", "N", "NW"],
-        ["E", "g", "g", "g", "g", "wall", "g", "g", "wall", "wall", "g", "wall", "g", "g", "g", "W"],
-        ["E", "g", "wall", "wall", "wall", "wall", "wall", "g", "g", "wall", "g", "wall", "g", "wall", "g", "W"],
-        ["E", "g", "wall", "g", "g", "g", "g", "g", "g", "wall", "g", "wall", "g", "wall", "g", "W"],
-        ["E", "g", "wall", "g", "g", "wall", "wall", "g", "wall", "wall", "g", "g", "g", "wall", "g", "end"],
-        ["E", "g", "wall", "wall", "g", "g", "g", "g", "g", "g", "wall", "wall", "wall", "wall", "g", "W"],
-        ["E", "g", "g", "wall", "wall", "wall", "g", "wall", "wall", "g", "g", "g", "g", "wall", "g", "W"],
-        ["E", "wall", "g", "g", "g", "g", "g", "g", "g", "wall", "wall", "wall", "g", "g", "g", "W"],
+        ["E", "g", "g", "g", "g", "w", "g", "g", "w", "w", "g", "w", "g", "g", "g", "W"],
+        ["E", "g", "w", "w", "w", "w", "w", "g", "g", "w", "g", "w", "g", "w", "g", "W"],
+        ["E", "g", "w", "g", "g", "g", "g", "g", "g", "w", "g", "w", "g", "w", "g", "W"],
+        ["E", "g", "w", "g", "g", "w", "w", "g", "w", "w", "g", "g", "g", "w", "g", "end"],
+        ["E", "g", "w", "w", "g", "g", "g", "g", "g", "g", "w", "w", "w", "w", "g", "W"],
+        ["E", "g", "g", "w", "w", "w", "g", "w", "w", "g", "g", "g", "g", "w", "g", "W"],
+        ["E", "w", "g", "g", "g", "g", "g", "g", "g", "w", "w", "w", "g", "g", "g", "W"],
         ["SE", "S", "S", "S", "S", "S", "S", "S", "S", "S", "S", "S", "S", "S", "S", "SW"]
     ]
 }
